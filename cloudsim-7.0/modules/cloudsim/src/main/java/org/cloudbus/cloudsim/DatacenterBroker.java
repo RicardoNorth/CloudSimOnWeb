@@ -205,8 +205,8 @@ public class DatacenterBroker extends SimEntity {
 		setDatacenterIdsList(CloudSim.getCloudResourceList());
 		setDatacenterCharacteristicsList(new HashMap<>());
 
-		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": Cloud Resource List received with ",
-				getDatacenterIdsList().size(), " datacenter(s)");
+		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 已收到包含 ",
+				getDatacenterIdsList().size(), " 个数据中心的云资源列表");
 
 		for (Integer datacenterId : getDatacenterIdsList()) {
 			sendNow(datacenterId, CloudActionTags.RESOURCE_CHARACTERISTICS, getId());
@@ -232,11 +232,11 @@ public class DatacenterBroker extends SimEntity {
 			getVmsToDatacentersMap().put(vmId, datacenterId);
 			getGuestsCreatedList().add(guest);
 			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": ", guest.getClassName(), " #", vmId,
-					" has been created in Datacenter #", datacenterId, ", ", guest.getHost().getClassName(), " #",
+					" 已经在 datacenter #", datacenterId, "被创建, ", guest.getHost().getClassName(), " #",
 					guest.getHost().getId());
 		} else {
-			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": Creation of ", guest.getClassName(), " #", vmId,
-					" failed in Datacenter #", datacenterId);
+			Log.printlnConcat(CloudSim.clock(), ":", getName(),": 在数据中心 #", datacenterId,"中创建虚拟机 ",
+					guest.getClassName(), " #", vmId, " 失败");
 		}
 
 		incrementVmsAcks();
@@ -277,12 +277,12 @@ public class DatacenterBroker extends SimEntity {
 	protected void processCloudletReturn(SimEvent ev) {
 		Cloudlet cloudlet = (Cloudlet) ev.getData();
 		getCloudletReceivedList().add(cloudlet);
-		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": ", cloudlet.getClass().getSimpleName(), " #", cloudlet.getCloudletId(),
-				" return received");
-		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": The number of finished Cloudlets is:", getCloudletReceivedList().size());
+		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 已收到 ", cloudlet.getClass().getSimpleName(), " #", cloudlet.getCloudletId(),
+				" 的返回结果");
+		Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 已完成的 Cloudlet 数量为:", getCloudletReceivedList().size());
 		cloudletsSubmitted--;
 		if (getCloudletList().isEmpty() && cloudletsSubmitted == 0) { // all cloudlets executed
-			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": All Cloudlets executed. Finishing...");
+			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 所有 Cloudlet 已执行完毕，正在结束模拟...");
 			clearDatacenters();
 			finishExecution();
 		} else { // some cloudlets haven't finished yet
@@ -331,8 +331,8 @@ public class DatacenterBroker extends SimEntity {
 		String datacenterName = CloudSim.getEntityName(datacenterId);
 		for (GuestEntity vm : getGuestList()) {
 			if (!getVmsToDatacentersMap().containsKey(vm.getId())) {
-				Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": Trying to Create ", vm.getClassName(),
-						" #", vm.getId(), " in ", datacenterName);
+				Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 尝试在 ", datacenterName , " 内创建 ", vm.getClassName(),
+						" #", vm.getId());
 				sendNow(datacenterId, CloudActionTags.VM_CREATE_ACK, vm);
 				requestedVms++;
 			}
@@ -377,8 +377,8 @@ public class DatacenterBroker extends SimEntity {
 			}
 
 			if (!Log.isDisabled()) {
-				Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": Sending ", cloudlet.getClass().getSimpleName(),
-						" #", cloudlet.getCloudletId(), " to " + vm.getClassName() + " #", vm.getId());
+				Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 发送 ", cloudlet.getClass().getSimpleName(),
+						" #", cloudlet.getCloudletId(), " 给 " + vm.getClassName() + " #", vm.getId() + "中");
 			}
 			
 			cloudlet.setGuestId(vm.getId());
@@ -401,7 +401,7 @@ public class DatacenterBroker extends SimEntity {
 	 */
 	protected void clearDatacenters() {
 		for (GuestEntity vm : getGuestsCreatedList()) {
-			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": Destroying ", vm.getClassName(), " #", vm.getId());
+			Log.printlnConcat(CloudSim.clock(), ": ", getName(), ": 正在销毁 ", vm.getClassName(), " #", vm.getId());
 			sendNow(getVmsToDatacentersMap().get(vm.getId()), CloudActionTags.VM_DESTROY, vm);
 		}
 

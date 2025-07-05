@@ -109,7 +109,7 @@ public class Datacenter extends SimEntity {
 
 	/**
 	 * Overrides this method when making a new and different type of resource. <br>
-	 * <b>NOTE:</b> You do not need to override {@link #body()} method, if you use this method.
+	 * <b>NOTE:</b> You do not need to override {@link # body()} method, if you use this method.
 	 * 
 	 * @pre $none
 	 * @post $none
@@ -423,7 +423,7 @@ public class Datacenter extends SimEntity {
 			guest.updateCloudletsProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(guest).getGuestScheduler()
 					.getAllocatedMipsForGuest(guest));
 		} else {
-			Log.printlnConcat(CloudSim.clock(), ": Datacenter.guestAllocator: Couldn't find a host for ", guest.getClassName(), " #", guest.getId());
+			Log.printlnConcat(CloudSim.clock(), ": Datacenter.guestAllocator: 无法为 ", guest.getClassName(), " #", guest.getId(), " 找到可用的主机");
 		}
 	}
 

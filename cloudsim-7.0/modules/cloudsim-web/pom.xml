@@ -28,6 +28,13 @@
             <artifactId>cloudsim</artifactId>
             <version>7.0.0-alpha</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.cloudbus.cloudsim</groupId>
+            <artifactId>cloudsim-examples</artifactId>
+            <version>7.0.0-alpha</version>
+        </dependency>
+
     </dependencies>
 
     <build>

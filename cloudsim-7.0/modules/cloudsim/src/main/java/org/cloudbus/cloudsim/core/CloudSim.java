@@ -123,7 +123,7 @@ public class CloudSim {
 			// set all the above entity IDs
 			cisId = cis.getId();
 		} catch (Exception s) {
-			Log.println("CloudSim.init(): The simulation has been terminated due to an unexpected error");
+			Log.println("CloudSim.init()：由于发生了意外错误，模拟已被终止");
 			Log.println(s.getMessage());
 		}
 	}
@@ -153,7 +153,7 @@ public class CloudSim {
 	 */
 	public static void init(int numUser, Calendar cal, boolean traceFlag, double minTimeBetweenEvents) {
 	    if (minTimeBetweenEvents <= 0) {
-		throw new IllegalArgumentException("The minimal time between events should be positive, but is:" + minTimeBetweenEvents);
+		throw new IllegalArgumentException("事件之间的最小时间间隔应为正值，但现在为：" + minTimeBetweenEvents);
 	    }
 	    
 	    init(numUser, cal, traceFlag);
@@ -177,7 +177,7 @@ public class CloudSim {
 	 * @post $none
 	 */
 	public static double startSimulation() throws NullPointerException {
-		Log.printlnConcat("Starting CloudSim version ", CLOUDSIM_VERSION_STRING);
+		Log.printlnConcat("正在启动 CloudSim 版本 ", CLOUDSIM_VERSION_STRING);
 		try {
 			double clock = run();
 
@@ -223,7 +223,7 @@ public class CloudSim {
 	 */
 	public static void terminateSimulation() {
 		running = false;
-		printMessage("Simulation: Reached termination time.");
+		printMessage("模拟：已达到终止时间");
 	}
 
 	/**
@@ -333,7 +333,7 @@ public class CloudSim {
 	 * start of the simulation.
 	 */
 	protected static void initialize() {
-		Log.println("Initialising...");
+		Log.println("初始化中...");
 		entities = new ArrayList<>();
 		entitiesByName = new LinkedHashMap<>();
 		future = new EventQueue();
@@ -503,7 +503,7 @@ public class CloudSim {
 
 		if (future.isEmpty()) {
 			running = false;
-			printMessage(CloudSim.clock()+": Simulation: No more future events");
+			printMessage(CloudSim.clock()+": 模拟：没有更多的未来事件了");
 			return false;
 		}
 
@@ -519,7 +519,7 @@ public class CloudSim {
 	 * Internal method used to stop the simulation. This method should <b>not</b> be used directly.
 	 */
 	public static void runStop() {
-		printMessage("Simulation completed.");
+		printMessage("模拟已完成");
 	}
 
 	/**
@@ -684,7 +684,7 @@ public class CloudSim {
 			ent.startEntity();
 		}
 
-		printMessage("Entities started.");
+		printMessage("实体已启动");
 	}
 
 	/**

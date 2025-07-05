@@ -148,7 +148,7 @@ public class CloudSimExample5 {
 			Log.print("=============> User "+brokerId2+"    ");
 			printCloudletList(newList2);
 
-			Log.println("CloudSimExample5 finished!");
+			Log.println("CloudSimExample5 已完成!");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

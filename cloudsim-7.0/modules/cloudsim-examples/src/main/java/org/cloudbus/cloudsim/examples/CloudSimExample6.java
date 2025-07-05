@@ -35,10 +35,7 @@ import org.cloudbus.cloudsim.provisioners.BwProvisionerSimple;
 import org.cloudbus.cloudsim.provisioners.PeProvisionerSimple;
 import org.cloudbus.cloudsim.provisioners.RamProvisionerSimple;
 
-/**
- * An example showing how to create
- * scalable simulations.
- */
+// 一个展示如何创建可扩展模拟的示例。
 public class CloudSimExample6 {
 	public static DatacenterBroker broker;
 
@@ -95,7 +92,7 @@ public class CloudSimExample6 {
 	 * Creates main() to run this example
 	 */
 	public static void main(String[] args) {
-		Log.println("Starting CloudSimExample6...");
+		Log.println("启动 CloudSimExample6...");
 
 		try {
 			// First step: Initialize the CloudSim package. It should be called
@@ -133,7 +130,7 @@ public class CloudSimExample6 {
 
 			printCloudletList(newList);
 
-			Log.println("CloudSimExample6 finished!");
+			Log.println("CloudSimExample6 已完成");
 		}
 		catch (Exception e)
 		{

@@ -17,6 +17,22 @@ public class SimulationController {
 
     @PostMapping("/simulate")
     public List<CloudletResult> simulate(@RequestBody SimulationRequest request) {
-        return simulationService.runSimulation(request.getVmCount(), request.getCloudletCount());
+        // 获取前端传来的算法字段，如果为空则默认使用 "timeshared"
+        System.out.println("收到的 VM MIPS 列表: " + request.getVmMipsList());
+        String algorithm = request.getAlgorithm();
+        if (algorithm == null || algorithm.isBlank()) {
+            algorithm = "timeshared";
+        }
+
+        // 调试信息：输出前端传来的 VM MIPS 列表
+        System.out.println("收到的 VM MIPS 列表: " + request.getVmMipsList());
+
+        // 调用支持 MIPS 参数的方法
+        return simulationService.runSimulation(
+                request.getVmCount(),
+                request.getCloudletCount(),
+                algorithm.toLowerCase(),
+                request.getVmMipsList()
+        );
     }
 }
